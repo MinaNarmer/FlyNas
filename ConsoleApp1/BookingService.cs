@@ -25,20 +25,23 @@ namespace ConsoleApp1
         public (bool, string) CreateBooking(string passengerName, string birthDate, string email, string salesChannel,
           DateTime bookingDate)
         {
-            if (string.IsNullOrEmpty(passengerName))
-            {
-                return (false, string.Empty);
-            }
+            //    if (string.IsNullOrEmpty(passengerName))
+            //    {
+            //        return (false, string.Empty);
+            //    }
 
-            if (string.IsNullOrEmpty(email) || !email.Contains("@") || !email.Contains("."))
-            {
-                return (false, string.Empty);
-            }
+            //    if (string.IsNullOrEmpty(email) || !email.Contains("@") || !email.Contains("."))
+            //    {
+            //        return (false, string.Empty);
+            //    }
 
             if (string.IsNullOrEmpty(birthDate) || !DateTime.TryParse(birthDate, out var actualBirthDate))
             {
                 return (false, string.Empty);
             }
+
+            Helper.ValidateName(passengerName);
+            Helper.ValidateEmail(email);
 
             decimal price = _SalesChannelFactoryService.GetSalesChannel(salesChannel).GetPrice(bookingDate);
 
